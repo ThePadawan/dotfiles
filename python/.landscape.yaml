@@ -1,5 +1,0 @@
-strictness: veryhigh
-#uses:
-#  - flask
-python-targets:
-  - 3

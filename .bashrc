@@ -1,9 +1,13 @@
-alias gp='git push'
 alias unlock='exec ssh-agent bash --rcfile <(echo ". ~/.bashrc; eval ssh-agent -s; ssh-add ~/.ssh/id_rsa")'
-function gitall {
+
+function tomp3 {
   if [[ -z $1 ]]; then
-    echo "You must specify a dictionary pattern."
+    echo "You must specify a file to convert."
     return
   fi
-  ls -d $1 | xargs -P10 -I{} git -C {} pull --rebase
+
+  FIN=$1
+  FOUT=${FIN%.*}.mp3
+
+  ffmpeg -i "$FIN" -codec:a libmp3lame -qscale:a 0 "$FOUT"
 }
