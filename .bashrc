@@ -1,4 +1,16 @@
-alias unlock='exec ssh-agent bash --rcfile <(echo ". ~/.bashrc; eval ssh-agent -s; ssh-add ~/.ssh/id_rsa")'
+# Start SSH Agent on boot
+if [ -f ~/.agent.env ] ; then
+    . ~/.agent.env > /dev/null
+    if ! kill -0 $SSH_AGENT_PID > /dev/null 2>&1; then
+        echo "Stale agent file found. Spawning new agent… "
+        eval `ssh-agent | tee ~/.agent.env`
+        ssh-add
+    fi 
+else
+    echo "Starting ssh-agent"
+    eval `ssh-agent | tee ~/.agent.env`
+    ssh-add
+fi
 
 function tomp3 {
   if [[ -z $1 ]]; then
