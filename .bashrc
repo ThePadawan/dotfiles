@@ -13,13 +13,11 @@ else
 fi
 
 function tomp3 {
-  if [[ -z $1 ]]; then
-    echo "You must specify a file to convert."
-    return
-  fi
+  ARR=("$@")
 
-  FIN=$1
-  FOUT=${FIN%.*}.mp3
-
-  ffmpeg -i "$FIN" -codec:a libmp3lame -qscale:a 0 "$FOUT"
+  for FIN in "${ARR[@]}";
+    do
+  	  FOUT=${FIN%.*}.mp3
+      ffmpeg -i "$FIN" -codec:a libmp3lame -qscale:a 0 "$FOUT"
+    done
 }
