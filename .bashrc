@@ -30,3 +30,7 @@ function psd2png {
   FOUT=${1%.*}.png
   magick convert "$1[0]" $FOUT
 }
+
+function ytmp3 {
+	youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 "$1"
+}
