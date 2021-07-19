@@ -1,9 +1,11 @@
 [user]
 	name = Rudolf M. Schreier
+[commit]
+	gpgsign = true
 [push]
 	default = simple
 [alias]
 	st = status
-	ci = commit
+	ci = commit -S
 [core]
-	autocrlf = true
+	autocrlf = input
